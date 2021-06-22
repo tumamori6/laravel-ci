@@ -5,6 +5,9 @@ jobs:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
+      - setup_remote_docker:
+        docker_layer_caching: true
+      - run: docker build .
       - run: sudo composer self-update --1
       - restore_cache:
           key: composer-v1-{{ checksum "composer.lock" }}
